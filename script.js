@@ -1,5 +1,5 @@
 let enteredPin = "";
-const CORRECT_PIN = "1234"; // Yahan password badal sakte hain
+const CORRECT_PIN = "0609"; // Yahan password badal sakte hain
 
 function pressNum(num) {
   if (enteredPin.length < 4) {
