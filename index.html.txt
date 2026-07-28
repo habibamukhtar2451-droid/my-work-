@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Surprise For You! 💖</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="hearts-bg"></div>
+
+  <!-- Background Music Player -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+
+  <!-- STEP 1: PASSCODE SCREEN -->
+  <div id="step-passcode" class="card active">
+    <img src="https://media.giphy.com/media/cLS1dkpS5YqwZaMmdU/giphy.gif" alt="Cute Cat" class="card-img">
+    <h2>Enter a passcode</h2>
+    <div class="code-dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    <div class="keypad">
+      <button onclick="pressNum('1')">1</button>
+      <button onclick="pressNum('2')">2</button>
+      <button onclick="pressNum('3')">3</button>
+      <button onclick="pressNum('4')">4</button>
+      <button onclick="pressNum('5')">5</button>
+      <button onclick="pressNum('6')">6</button>
+      <button onclick="pressNum('7')">7</button>
+      <button onclick="pressNum('8')">8</button>
+      <button onclick="pressNum('9')">9</button>
+      <button onclick="clearPin()">*</button>
+      <button onclick="pressNum('0')">0</button>
+      <button onclick="clearPin()">#</button>
+    </div>
+    <button class="action-btn" onclick="checkPasscode()">UNLOCK</button>
+  </div>
+
+  <!-- STEP 1.5: WRONG PASSCODE MODAL -->
+  <div id="modal-wrong" class="card modal">
+    <h2>WRONG PASSCODE!</h2>
+    <img src="https://media.giphy.com/media/L95W4wv8nnb9K/giphy.gif" alt="Sad Pikachu" class="card-img">
+    <button class="action-btn" onclick="retryPasscode()">TRY AGAIN</button>
+  </div>
+
+  <!-- STEP 2: WANT TO SEE QUESTION -->
+  <div id="step-question1" class="card">
+    <h2>I made something special for u,<br>do u want to see?</h2>
+    <img src="https://media.giphy.com/media/K1tgb1IUeBO0g/giphy.gif" alt="Cute Cats Box" class="card-img">
+    <div class="btn-group">
+      <button class="btn-yes" onclick="nextStep('step-hbday')">YES</button>
+      <button class="btn-no" onclick="showNoWarning()">NO</button>
+    </div>
+  </div>
+
+  <!-- STEP 2.5: NO WARNING -->
+  <div id="modal-no-warn" class="card modal">
+    <h2>Why did u click no?! 🥺</h2>
+    <img src="https://media.giphy.com/media/114X7S7KIR85Ec/giphy.gif" alt="Crying Cat" class="card-img">
+    <button class="action-btn" onclick="closeNoWarning()">TRY AGAIN</button>
+  </div>
+
+  <!-- STEP 3: HAPPY BIRTHDAY CARD -->
+  <div id="step-hbday" class="card">
+    <h2 class="title-pink">HAPPY BIRTHDAY 🎉</h2>
+    <img src="https://media.giphy.com/media/g5R9dok94mrIvJGm2a/giphy.gif" alt="Happy Birthday Cats" class="card-img">
+    <button class="action-btn" onclick="nextStep('step-wish')">CLICK ME</button>
+  </div>
+
+  <!-- STEP 4: MY WISH FOR YOU -->
+  <div id="step-wish" class="card">
+    <h2 class="title-pink">MY WISH FOR U</h2>
+    <div class="wish-box">
+      <p>🎂✨ <b>Happy Birthday to My Very Special Person!</b> ❤️✨</p>
+      <p>Today is all about celebrating you. 🥳 Thank you for being such a wonderful part of my life. Your smile 😊, your kindness 🌸, and your beautiful heart 💗 make every moment more special. Loving this... unforgettable memories. 🎁✨</p>
+      <p>May every dream you have come true, every goal you set be achieved, and every step you take lead you to something amazing. 💫 You truly deserve all the love, joy, and blessings this world has to offer. 💖</p>
+      <p>May Allah bless you with a long, healthy, and beautiful life. 🤲 May He accept all your duas. 🌟✨ May your life always be filled with love ❤️, smiles 😊, and countless blessings. Ameen. 🌙💖</p>
+      <p>🎂 Once again, Happy Birthday! 🥳 Wishing you the most amazing year ahead. 🌟🎉✨</p>
+    </div>
+    <button class="action-btn" onclick="nextStep('step-hug')">CLICK ME</button>
+  </div>
+
+  <!-- STEP 5: VIRTUAL HUG -->
+  <div id="step-hug" class="card">
+    <h2>Virtual hug for ya! 🤗</h2>
+    <img src="https://media.giphy.com/media/l2QDM9Jnim1YV7FC0/giphy.gif" alt="Hug Cat" class="card-img">
+    <h2 class="title-pink">I MISS YOU</h2>
+    <button class="action-btn" onclick="nextStep('step-mine')">CLICK ME</button>
+  </div>
+
+  <!-- STEP 6: WILL YOU BE MINE? -->
+  <div id="step-mine" class="card">
+    <h2 class="title-pink">Will you be mine? 👑</h2>
+    <img src="https://media.giphy.com/media/K1tgb1IUeBO0g/giphy.gif" alt="Cute Cats Flowers" class="card-img">
+    <div class="btn-group">
+      <button class="btn-yes" onclick="handleFinalYes()">YES!</button>
+      <button class="btn-no" onclick="handleFinalNo()">NO</button>
+    </div>
+  </div>
+
+  <!-- STEP 7: CUTE VIDEO CARD -->
+  <div id="step-video" class="card">
+    <h2 class="title-pink">Special Video For You 🎥</h2>
+    <div class="video-box">
+      <video controls poster="https://media.giphy.com/media/3o7TKoWXm3okO1mgHC/giphy.gif">
+        <source src="my-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <button class="action-btn" onclick="nextStep('step-ending')">FINAL SURPRISE ✨</button>
+  </div>
+
+  <!-- STEP 8: CUTE ENDING CARD -->
+  <div id="step-ending" class="card">
+    <h2 class="title-pink">Thank You For Everything! 💖</h2>
+    <img src="https://media.giphy.com/media/MDJ9Ibxx5ASSc/giphy.gif" alt="Sweet Ending Cat" class="card-img">
+    <p class="ending-text">You mean the world to me! Always stay happy and keep smiling. Happy Birthday once again! 🎈✨</p>
+    <div class="animated-heart">❤️</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
